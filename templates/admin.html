@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>留言审核</title></head>
+<body>
+<h2>留言管理后台</h2>
+<a href="/logout">退出登录</a>
+{% for c in comments %}
+<div style="margin-top: 1rem; padding: 1rem; border: 1px solid #ccc;">
+    <strong>{{ c.name }}</strong>: {{ c.content }}<br>
+    <small>{{ c.timestamp.strftime('%Y-%m-%d %H:%M') }}</small><br>
+    状态：{{ c.status }}
+    {% if c.status != 'approved' %}
+        <a href="/approve/{{ c.id }}">通过</a>
+    {% endif %}
+    <a href="/delete/{{ c.id }}">删除</a>
+</div>
+{% endfor %}
+</body>
+</html>
